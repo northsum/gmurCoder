@@ -15,12 +15,15 @@ jobs:
               run: |
                 cd snippets
                 python3 create_snippets.py
-            - name: commit-and-push-all-changes
+            - name: config git
               run: |
                 git config --local user.name "${{ secrets.ACCOUNT_NAME }}"
                 git config --local user.email "${{ secrets.ACCOUNT_EMAIL }}"
+            - name: commit-and-push-all-changes
+              run: |
+                git status
                 git add .
-                git commit -m "Add updated snippets [no ci]"
+                git commit -m "Add updated snippets [no ci]" || echo "No changes to commit"
                 git push
               env:
                 GITHUB_TOkEN: ${{ secrets.GITHUB_TOKEN }}

@@ -20,7 +20,7 @@ def create_snipets():
             "description": f"snipet for {basename}"
         }
     
-    with open("snippet.json", "w") as f:
+    with open("snippets.json", "w") as f:
         json.dump(snippets, f, ensure_ascii=False, indent=4)
 
 for folder in Path(".").glob("[a-z]+"):

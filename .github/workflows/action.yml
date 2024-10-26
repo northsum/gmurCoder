@@ -15,8 +15,6 @@ jobs:
               run: |
                 cd snippets
                 python3 create_snippets.py
-            - name: display-snippets
-              run: cat snippets.json
             - name: commit-and-push-all-changes
               run: |
                 git config --local user.name "${{ secrets.ACCOUNT_NAME }}"

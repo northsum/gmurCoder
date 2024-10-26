@@ -1,0 +1,28 @@
+name: make snipet flow
+
+on:
+    push:
+        branches: 
+            - main
+
+jobs:
+    make-snipet:
+        runs-on: ubuntu-latest
+        steps:
+            - name: checkout
+              uses: actions/checkout@v4
+            - name: concat-programs
+              run: |
+                cd snippets
+                python3 generate_snippets.py
+            - name: display-snippets
+              run: cat snippets.json
+            - name: commit-and-push-all-changes
+              run: |
+                git config --local user.name "${{ secrets.ACCOUNT_NAME }}"
+                git config --local user.email "${{ secrets.ACCOUNT_EMAIL }}"
+                git add .
+                git commit -m "Add updated snippets [no ci]"
+                git push
+              env:
+                GITHUB_TOkEN: ${{ secrets.GITHUB_TOKEN }}

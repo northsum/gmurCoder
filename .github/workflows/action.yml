@@ -14,7 +14,7 @@ jobs:
             - name: concat-programs
               run: |
                 cd snippets
-                python3 generate_snippets.py
+                python3 create_snippets.py
             - name: display-snippets
               run: cat snippets.json
             - name: commit-and-push-all-changes
